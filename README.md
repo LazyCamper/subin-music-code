@@ -48,12 +48,12 @@ npx serve .
 ## GitHub Pages 배포 방법
 빌드 도구가 없는 순수 정적 파일 구조이므로 별도 GitHub Actions 워크플로 없이 **`main` 브랜치 루트(`/`)**에서 바로 배포합니다.
 
-1. GitHub에서 새 저장소(예: `[저장소명]`)를 생성하고 로컬 커밋을 푸시합니다.
+1. GitHub에서 새 저장소(`subin-music-code`)를 생성하고 로컬 커밋을 푸시합니다.
 2. GitHub 저장소 페이지에서 **Settings → Pages**로 이동합니다.
 3. **Build and deployment**의 **Source**를 `Deploy from a branch`로 선택합니다.
 4. **Branch**를 `main`, 폴더를 `/ (root)`로 지정한 뒤 **Save**를 클릭합니다.
 5. 1~2분 후 접속 주소:
-   - `https://<아이디>.github.io/<저장소명>/`
+   - https://lazycamper.github.io/subin-music-code/
    - 모든 리소스(`css`, `js`, `data`, `manifest.json`, `sw.js`, `icons`)가 `./` 상대 경로로 작성되어 있어 저장소 하위 주소에서도 정상 동작합니다.
 
 ## 업데이트 배포 방법
@@ -61,7 +61,7 @@ npx serve .
 2. 변경 사항을 `git commit` 후 `git push origin main` 하면 1~2분 내 새 버전이 반영됩니다.
 
 ## 안드로이드 Chrome에서 "홈 화면에 추가" 방법
-1. 안드로이드 Chrome에서 `https://<아이디>.github.io/<저장소명>/` 주소로 접속합니다.
+1. 안드로이드 Chrome에서 `https://lazycamper.github.io/subin-music-code/` 주소로 접속합니다.
 2. 우측 상단 **메뉴(`⋮`)** 버튼을 탭합니다.
 3. **홈 화면에 추가**(또는 **앱 설치**)를 선택하고 **추가 / 설치**를 누릅니다.
 4. 홈 화면 아이콘으로 실행하면 주소창 없는 전체 화면(`standalone`) 및 오프라인 환경에서도 동작합니다.
