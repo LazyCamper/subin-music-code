@@ -411,11 +411,19 @@ function bindEvents() {
 }
 
 function registerServiceWorker() {
-  if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(() => {});
-    });
-  }
+  if (!('serviceWorker' in navigator) || window.location.protocol === 'file:') return;
+
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    refreshing = true;
+    window.location.reload();
+  });
+
+  navigator.serviceWorker
+    .register('./sw.js', { updateViaCache: 'none' })
+    .then((reg) => reg.update().catch(() => {}))
+    .catch(() => {});
 }
 
 init();
