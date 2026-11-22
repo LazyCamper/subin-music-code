@@ -45,7 +45,10 @@ const els = {
   viewSongs: document.getElementById('view-songs'),
   favoritesList: document.getElementById('favorites-list'),
   favTotalLabel: document.getElementById('fav-total-label'),
-  navFavBadge: document.getElementById('nav-fav-badge')
+  navFavBadge: document.getElementById('nav-fav-badge'),
+  btnAppLauncher: document.getElementById('btn-app-launcher'),
+  appLauncherBackdrop: document.getElementById('app-launcher-backdrop'),
+  launcherCloseBtn: document.getElementById('launcher-close-btn')
 };
 
 const songsController = createSongsController({
@@ -386,6 +389,23 @@ function bindEvents() {
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.search-wrap')) {
       els.searchResults.hidden = true;
+    }
+  });
+
+  function setLauncherOpen(open) {
+    if (!els.appLauncherBackdrop || !els.btnAppLauncher) return;
+    els.appLauncherBackdrop.hidden = !open;
+    els.btnAppLauncher.setAttribute('aria-expanded', String(open));
+  }
+
+  els.btnAppLauncher?.addEventListener('click', () => setLauncherOpen(true));
+  els.launcherCloseBtn?.addEventListener('click', () => setLauncherOpen(false));
+  els.appLauncherBackdrop?.addEventListener('click', (e) => {
+    if (e.target === els.appLauncherBackdrop) setLauncherOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && els.appLauncherBackdrop && !els.appLauncherBackdrop.hidden) {
+      setLauncherOpen(false);
     }
   });
 }

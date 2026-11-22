@@ -88,9 +88,40 @@ body {
 
 .header-top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 10px;
+}
+
+.header-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.launcher-btn {
+  min-width: 48px;
+  min-height: 44px;
+  padding: 0 11px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.launcher-btn:active {
+  background: var(--primary-soft);
+  border-color: var(--primary);
 }
 
 .app-title {
@@ -1065,4 +1096,65 @@ body {
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 8px;
+}
+
+.app-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.app-link-card {
+  min-height: 64px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  background: var(--surface-alt);
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-link-card:active {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.app-link-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.app-link-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-link-title {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.app-link-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.app-link-arrow {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-muted);
 }

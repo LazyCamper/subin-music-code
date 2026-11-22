@@ -18,8 +18,21 @@
   <div class="app-shell">
     <header class="app-header">
       <div class="header-top">
-        <h1 class="app-title">코드 비교</h1>
-        <span class="app-subtitle">피아노 · 우쿨렐레 · 기타</span>
+        <div class="header-title-group">
+          <h1 class="app-title">코드 비교</h1>
+          <span class="app-subtitle">피아노 · 우쿨렐레 · 기타</span>
+        </div>
+        <button
+          id="btn-app-launcher"
+          class="launcher-btn"
+          type="button"
+          aria-label="내 다른 앱 바로가기"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+        >
+          <span aria-hidden="true">⊞</span>
+          <span class="launcher-label">내 앱</span>
+        </button>
       </div>
       <div class="search-wrap">
         <label class="sr-only" for="chord-search">코드 검색</label>
@@ -100,6 +113,37 @@
     <div id="chord-sheet-backdrop" class="sheet-backdrop" hidden>
       <div class="bottom-sheet" role="dialog" aria-modal="true" aria-label="코드 운지 상세">
         <div id="chord-sheet-content"></div>
+      </div>
+    </div>
+
+    <!-- 내 앱 바로가기 하단 시트 -->
+    <div id="app-launcher-backdrop" class="sheet-backdrop" hidden>
+      <div class="bottom-sheet" role="dialog" aria-modal="true" aria-label="내 다른 앱 바로가기">
+        <div class="sheet-header">
+          <div>
+            <h2 class="edit-title">내 다른 앱</h2>
+            <span class="diagram-sub">LazyCamper 웹앱 바로가기</span>
+          </div>
+          <button id="launcher-close-btn" class="icon-btn" type="button" aria-label="닫기">✕</button>
+        </div>
+        <div class="app-links-list">
+          <a class="app-link-card" href="https://lazycamper.github.io/my-car-manager/" target="_blank" rel="noopener noreferrer">
+            <span class="app-link-icon" aria-hidden="true">🚗</span>
+            <span class="app-link-info">
+              <strong class="app-link-title">내 차 관리</strong>
+              <span class="app-link-sub">my-car-manager</span>
+            </span>
+            <span class="app-link-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="app-link-card" href="https://lazycamper.github.io/my-whisky-collection/" target="_blank" rel="noopener noreferrer">
+            <span class="app-link-icon" aria-hidden="true">🥃</span>
+            <span class="app-link-info">
+              <strong class="app-link-title">위스키 컬렉션</strong>
+              <span class="app-link-sub">my-whisky-collection</span>
+            </span>
+            <span class="app-link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </div>
 
