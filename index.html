@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="피아노, 우쿨렐레, 기타 코드를 한 화면에서 비교해 보는 모바일 우선 웹앱">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>코드 비교 · 피아노 · 우쿨렐레 · 기타</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="header-top">
+        <h1 class="app-title">코드 비교</h1>
+        <span class="app-subtitle">피아노 · 우쿨렐레 · 기타</span>
+      </div>
+      <div class="search-wrap">
+        <label class="sr-only" for="chord-search">코드 검색</label>
+        <input
+          id="chord-search"
+          class="search-input"
+          type="search"
+          inputmode="text"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="코드 검색 (예: Cm7, F#dim, G7)"
+        >
+        <div id="search-results" class="search-results" hidden role="listbox" aria-label="검색 결과"></div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- 코드 탐색 탭 -->
+      <section id="view-chords" class="tab-view active" aria-label="코드 찾기">
+        <section class="panel" aria-labelledby="root-heading">
+          <h2 id="root-heading" class="section-label">루트 음 선택</h2>
+          <div id="root-grid" class="root-grid" role="group" aria-label="12음 루트 선택"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="type-heading">
+          <h2 id="type-heading" class="section-label">코드 종류</h2>
+          <div id="type-list" class="type-list" role="group" aria-label="코드 종류 선택"></div>
+        </section>
+
+        <section id="chord-detail" class="detail-card" aria-live="polite">
+          <div class="detail-header">
+            <div class="detail-title-group">
+              <div class="detail-symbol-row">
+                <h2 id="detail-symbol" class="detail-symbol">C</h2>
+                <span id="detail-name" class="detail-name">C 메이저</span>
+              </div>
+              <div id="detail-notes" class="note-pills" aria-label="구성음"></div>
+            </div>
+            <div class="detail-actions">
+              <button id="btn-play" class="icon-btn play-btn" type="button" aria-label="코드 소리 듣기" title="소리 듣기">
+                <span aria-hidden="true">▶</span>
+                <span class="btn-label">듣기</span>
+              </button>
+              <button id="btn-favorite" class="icon-btn fav-btn" type="button" aria-label="즐겨찾기 추가" aria-pressed="false" title="즐겨찾기">
+                <span id="fav-icon" aria-hidden="true">☆</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="instrument-tabs" role="tablist" aria-label="악기 보기 선택">
+            <button class="inst-tab active" type="button" role="tab" aria-selected="true" data-inst="all">전체 보기</button>
+            <button class="inst-tab" type="button" role="tab" aria-selected="false" data-inst="piano">피아노</button>
+            <button class="inst-tab" type="button" role="tab" aria-selected="false" data-inst="ukulele">우쿨렐레</button>
+            <button class="inst-tab" type="button" role="tab" aria-selected="false" data-inst="guitar">기타</button>
+          </div>
+
+          <div id="diagrams-container" class="diagrams-container"></div>
+        </section>
+      </section>
+
+      <!-- 즐겨찾기 탭 -->
+      <section id="view-favorites" class="tab-view" hidden aria-label="즐겨찾기">
+        <div class="panel">
+          <div class="fav-header-row">
+            <h2 class="section-label">저장한 코드</h2>
+            <span id="fav-total-label" class="fav-total-label">0개</span>
+          </div>
+          <div id="favorites-list" class="favorites-list"></div>
+        </div>
+      </section>
+
+      <!-- 내 곡 탭 -->
+      <section id="view-songs" class="tab-view" hidden aria-label="내 곡"></section>
+    </main>
+
+    <!-- 코드 미리보기 하단 시트 -->
+    <div id="chord-sheet-backdrop" class="sheet-backdrop" hidden>
+      <div class="bottom-sheet" role="dialog" aria-modal="true" aria-label="코드 운지 상세">
+        <div id="chord-sheet-content"></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav" aria-label="하단 메뉴">
+      <button class="nav-btn active" type="button" data-tab="chords" aria-current="page">
+        <span class="nav-icon" aria-hidden="true">♪</span>
+        <span class="nav-text">코드</span>
+      </button>
+      <button class="nav-btn" type="button" data-tab="favorites">
+        <span class="nav-icon" aria-hidden="true">★</span>
+        <span class="nav-text">즐겨찾기 <span id="nav-fav-badge" class="nav-badge" hidden>0</span></span>
+      </button>
+      <button class="nav-btn" type="button" data-tab="songs">
+        <span class="nav-icon" aria-hidden="true">♫</span>
+        <span class="nav-text">내 곡</span>
+      </button>
+    </nav>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
