@@ -46,12 +46,25 @@ npx serve .
 브라우저에서 `http://localhost:3000` (또는 서버가 안내하는 주소)으로 접속합니다.
 
 ## GitHub Pages 배포 방법
-1. 이 폴더의 모든 파일을 GitHub 저장소(예: `chord-compare`)에 푸시합니다.
+빌드 도구가 없는 순수 정적 파일 구조이므로 별도 GitHub Actions 워크플로 없이 **`main` 브랜치 루트(`/`)**에서 바로 배포합니다.
+
+1. GitHub에서 새 저장소(예: `[저장소명]`)를 생성하고 로컬 커밋을 푸시합니다.
 2. GitHub 저장소 페이지에서 **Settings → Pages**로 이동합니다.
 3. **Build and deployment**의 **Source**를 `Deploy from a branch`로 선택합니다.
-4. **Branch**를 `main` (또는 기본 브랜치) 및 폴더를 `/ (root)`로 지정한 뒤 **Save**를 클릭합니다.
-5. 1~2분 후 상단에 표시되는 `https://<username>.github.io/<repo-name>/` URL로 접속합니다.
-   - 모든 경로가 `./` 상대 경로로 작성되어 있어 저장소 하위 경로에서도 정상 동작합니다.
+4. **Branch**를 `main`, 폴더를 `/ (root)`로 지정한 뒤 **Save**를 클릭합니다.
+5. 1~2분 후 접속 주소:
+   - `https://<아이디>.github.io/<저장소명>/`
+   - 모든 리소스(`css`, `js`, `data`, `manifest.json`, `sw.js`, `icons`)가 `./` 상대 경로로 작성되어 있어 저장소 하위 주소에서도 정상 동작합니다.
+
+## 업데이트 배포 방법
+1. 코드를 수정한 뒤 [sw.js](sw.js) 상단의 `CACHE_NAME` 상수(예: `chord-compare-v4` → `chord-compare-v5`)를 올립니다.
+2. 변경 사항을 `git commit` 후 `git push origin main` 하면 1~2분 내 새 버전이 반영됩니다.
+
+## 안드로이드 Chrome에서 "홈 화면에 추가" 방법
+1. 안드로이드 Chrome에서 `https://<아이디>.github.io/<저장소명>/` 주소로 접속합니다.
+2. 우측 상단 **메뉴(`⋮`)** 버튼을 탭합니다.
+3. **홈 화면에 추가**(또는 **앱 설치**)를 선택하고 **추가 / 설치**를 누릅니다.
+4. 홈 화면 아이콘으로 실행하면 주소창 없는 전체 화면(`standalone`) 및 오프라인 환경에서도 동작합니다.
 
 ## 코드 데이터 추가/수정 방법
 `data/chords.json` 파일을 열어 수정합니다.

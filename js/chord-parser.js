@@ -162,8 +162,8 @@ export function transposeKeyName(keyName, semitones, accidentalMode = 'sharp') {
 }
 
 /**
- * Parses multi-line chord progression text separated by '|' and/or whitespace.
- * Example: "| C | Am | F | G7 |" -> [["C", "Am", "F", "G7"]]
+ * Parses multi-line chord progression text separated by '.', whitespace, ',' or '|'.
+ * Example: "C . Am . F . G7" -> [["C", "Am", "F", "G7"]]
  */
 export function parseProgressionText(text, chordTypes = []) {
   const lines = String(text || '').split(/\r?\n/);
@@ -171,7 +171,7 @@ export function parseProgressionText(text, chordTypes = []) {
 
   for (const line of lines) {
     const tokens = line
-      .split(/[|\s,]+/)
+      .split(/[.\s,|]+/)
       .map((t) => t.trim())
       .filter(Boolean);
     if (tokens.length === 0) continue;

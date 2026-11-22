@@ -67,7 +67,7 @@ passed++;
 console.log(`PASS transpose: "F#dim" -1 (flat) -> "${t3}"`);
 
 // Progression text parse check
-const prog = parseProgressionText('| C | Am |\n| F | G7 |', chordTypes);
+const prog = parseProgressionText('C.Am\nF . G7', chordTypes);
 assert.deepEqual(prog, [['C', 'Am'], ['F', 'G7']]);
 passed++;
 console.log(`PASS progression: ${JSON.stringify(prog)}`);

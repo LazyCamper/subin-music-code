@@ -258,7 +258,7 @@ export function createSongsController({ getData, onOpenInChordTab }) {
 
     const textPreview = d.progression
       .filter((l) => l.length > 0)
-      .map((l) => `| ${l.join(' | ')} |`)
+      .map((l) => l.join(' . '))
       .join('\n');
 
     container.innerHTML = `
@@ -293,7 +293,7 @@ export function createSongsController({ getData, onOpenInChordTab }) {
 
       <div class="panel">
         <h3 class="section-label">입력 방법 A · 텍스트로 붙여넣기</h3>
-        <textarea id="draft-text-prog" class="prog-textarea" rows="3" placeholder="| C | Am | F | G7 |&#10;줄바꿈으로 마디 줄 구분">${escapeHtml(textPreview)}</textarea>
+        <textarea id="draft-text-prog" class="prog-textarea" rows="3" placeholder="C . Am . F . G7&#10;점(.) 또는 띄어쓰기로 구분, 줄바꿈으로 마디 줄 구분">${escapeHtml(textPreview)}</textarea>
         <button class="secondary-btn full-btn" type="button" data-action="apply-text-prog">텍스트를 코드 진행에 반영</button>
       </div>
 

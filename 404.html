@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fafc">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1120">
+  <title>페이지를 찾을 수 없습니다 · 코드 비교</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    .not-found-wrap {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .not-found-card {
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      padding: 28px 20px;
+    }
+    .not-found-code {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .not-found-msg {
+      margin: 8px 0 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .home-link {
+      text-decoration: none;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <main class="not-found-wrap">
+    <section class="panel not-found-card">
+      <h1 class="not-found-code">404</h1>
+      <p class="not-found-msg">요청하신 페이지를 찾을 수 없습니다.</p>
+      <a class="primary-btn home-link" href="./">코드 비교 홈으로 돌아가기</a>
+    </section>
+  </main>
+</body>
+</html>
