@@ -1,4 +1,4 @@
-const CACHE_NAME = 'chord-compare-v9';
+const CACHE_NAME = 'chord-compare-v10';
 const ASSETS = [
   './',
   './index.html',
@@ -15,9 +15,11 @@ const ASSETS = [
   './icons/icon.svg',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  './assets/usagi-happy.jpg',
-  './assets/usagi-music.jpg',
-  './assets/usagi-pattern.jpg'
+  './assets/usagi-face.png',
+  './assets/usagi-cheer.png',
+  './assets/usagi-dance.png',
+  './assets/usagi-ukulele.jpg',
+  './assets/usagi-friends.png'
 ];
 
 self.addEventListener('install', (event) => {

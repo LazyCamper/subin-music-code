@@ -89,12 +89,21 @@
   background: linear-gradient(180deg, #fff4b8 0%, #ffffff 100%);
 }
 
-:root[data-theme="usagi"] body {
-  background-image:
-    linear-gradient(rgba(255, 248, 219, 0.72), rgba(255, 248, 219, 0.72)),
-    url("../assets/usagi-pattern.jpg");
-  background-size: 260px 260px;
+:root[data-theme="usagi"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../assets/usagi-face.png");
+  background-size: 88px 88px;
   background-repeat: repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="usagi"] .app-shell {
+  position: relative;
+  z-index: 1;
 }
 
 .usagi-only {
@@ -107,6 +116,7 @@
   height: 38px;
   border-radius: 50%;
   object-fit: cover;
+  background: #ffffff;
   border: 2px solid #f59e0b;
   flex-shrink: 0;
 }
@@ -124,10 +134,11 @@
 }
 
 .usagi-banner-img {
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   border-radius: 14px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #ffffff;
   border: 1.5px solid #f3d98b;
   flex-shrink: 0;
 }
@@ -139,8 +150,37 @@
   text-align: center;
 }
 
+:root[data-theme="usagi"] .usagi-ukulele-strip {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.usagi-ukulele-img {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border-radius: 12px;
+}
+
+:root[data-theme="usagi"] .usagi-friends-strip {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0 4px;
+}
+
+.usagi-friends-img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 14px;
+}
+
 .theme-swatch-img {
   object-fit: cover;
+  background: #ffffff;
   padding: 0;
 }
 
