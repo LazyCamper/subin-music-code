@@ -1,4 +1,4 @@
-const CACHE_NAME = 'chord-compare-v8';
+const CACHE_NAME = 'chord-compare-v9';
 const ASSETS = [
   './',
   './index.html',
@@ -14,7 +14,10 @@ const ASSETS = [
   './data/chords.json',
   './icons/icon.svg',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './assets/usagi-happy.jpg',
+  './assets/usagi-music.jpg',
+  './assets/usagi-pattern.jpg'
 ];
 
 self.addEventListener('install', (event) => {
@@ -37,7 +40,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
-    fetch(event.request)
+    fetch(event.request, { cache: 'no-cache' })
       .then((response) => {
         if (response && response.status === 200 && response.type === 'basic') {
           const clone = response.clone();
