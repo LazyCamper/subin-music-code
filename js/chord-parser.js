@@ -34,7 +34,9 @@ const SUFFIX_ALIASES = {
   aug: 'aug',
   '+': 'aug',
   '6': '6',
-  '9': '9'
+  '9': '9',
+  add2: 'add2',
+  add9: 'add2'
 };
 
 function parseNoteToken(token) {

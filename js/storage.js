@@ -36,11 +36,23 @@ const DEFAULT_SONGS = [
     title: '혼잣말 (ひとりごつ)',
     artist: '하치와레',
     originalKey: 'C',
-    memo: '카포 2프렛 C 키 연주 기준 (원곡 D 키는 +2 반음)',
+    memo: '원곡 키 C 기준 (Verse 1 · Verse 2 · Chorus)',
     progression: [
-      ['C', 'F', 'G', 'C'],
-      ['Am', 'Em', 'F', 'G'],
-      ['C', 'E7', 'Am', 'F', 'G', 'C']
+      ['C', 'E7'],
+      ['FM7', 'FM7', 'G'],
+      ['FM7', 'FM7'],
+      ['C', 'E7', 'FM7'],
+      ['FM7', 'G', 'C'],
+      ['Em', 'Am'],
+      ['FM7', 'Dadd2', 'G'],
+      ['C', 'E7', 'FM7'],
+      ['FM7', 'G', 'C'],
+      ['Bb', 'F', 'Bb', 'F', 'G#', 'Bb'],
+      ['C', 'F', 'Dm', 'G'],
+      ['C/E', 'F', 'Dm', 'G'],
+      ['C/E', 'F', 'Dm', 'G', 'F'],
+      ['F'],
+      ['Bb', 'F', 'C']
     ]
   },
   {
@@ -139,21 +151,35 @@ function migrateSongsStore(rawStore) {
         s.id === 'builtin_hachiware_hitorigotsu' && rawTitle === '혼자말 (ひとりごつ)'
           ? '혼잣말 (ひとりごつ)'
           : rawTitle;
-      return {
-        id: typeof s.id === 'string' && s.id ? s.id : generateSongId(),
-        title,
-      artist: typeof s.artist === 'string' ? s.artist.trim() : '',
-      originalKey: typeof s.originalKey === 'string' ? s.originalKey.trim() : '',
-      memo: typeof s.memo === 'string' ? s.memo.trim() : '',
-      progression: Array.isArray(s.progression)
+      let progression = Array.isArray(s.progression)
         ? s.progression
             .filter((line) => Array.isArray(line) && line.length > 0)
             .map((line) => line.map((c) => String(c).trim()).filter(Boolean))
             .filter((line) => line.length > 0)
-        : [],
-      createdAt: typeof s.createdAt === 'string' ? s.createdAt : new Date().toISOString(),
-      updatedAt: typeof s.updatedAt === 'string' ? s.updatedAt : new Date().toISOString()
-    };
+        : [];
+      let memo = typeof s.memo === 'string' ? s.memo.trim() : '';
+
+      if (
+        s.id === 'builtin_hachiware_hitorigotsu' &&
+        JSON.stringify(progression) === JSON.stringify([['C', 'F', 'G', 'C'], ['Am', 'Em', 'F', 'G'], ['C', 'E7', 'Am', 'F', 'G', 'C']])
+      ) {
+        const latest = DEFAULT_SONGS.find((d) => d.id === 'builtin_hachiware_hitorigotsu');
+        if (latest) {
+          progression = latest.progression.map((line) => [...line]);
+          memo = latest.memo;
+        }
+      }
+
+      return {
+        id: typeof s.id === 'string' && s.id ? s.id : generateSongId(),
+        title,
+        artist: typeof s.artist === 'string' ? s.artist.trim() : '',
+        originalKey: typeof s.originalKey === 'string' ? s.originalKey.trim() : '',
+        memo,
+        progression,
+        createdAt: typeof s.createdAt === 'string' ? s.createdAt : new Date().toISOString(),
+        updatedAt: typeof s.updatedAt === 'string' ? s.updatedAt : new Date().toISOString()
+      };
     });
 
   return {
