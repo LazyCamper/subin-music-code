@@ -150,32 +150,35 @@
   text-align: center;
 }
 
-:root[data-theme="usagi"] .usagi-ukulele-strip {
-  display: flex;
-  justify-content: center;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px dashed var(--border);
+.theme-btn-usagi {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+  border: 1px solid #f59e0b;
 }
 
-.usagi-ukulele-img {
-  width: 100%;
-  max-width: 240px;
-  height: auto;
-  border-radius: 12px;
+.theme-btn-usagi[hidden] {
+  display: none;
 }
 
-:root[data-theme="usagi"] .usagi-friends-strip {
-  display: flex;
-  justify-content: center;
-  padding: 6px 0 4px;
+:root[data-theme="usagi"] #view-chords > .panel:first-of-type {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
+    url("../assets/usagi-ukulele.jpg");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 185px auto;
 }
 
-.usagi-friends-img {
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 14px;
+:root[data-theme="usagi"] #chord-detail {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.86)),
+    url("../assets/usagi-friends.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 155px auto;
 }
 
 .theme-swatch-img {

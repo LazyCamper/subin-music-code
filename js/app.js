@@ -53,6 +53,7 @@ const els = {
   launcherCloseBtn: document.getElementById('launcher-close-btn'),
   btnTheme: document.getElementById('btn-theme'),
   themeBtnIcon: document.getElementById('theme-btn-icon'),
+  themeBtnUsagi: document.getElementById('theme-btn-usagi'),
   themeSheetBackdrop: document.getElementById('theme-sheet-backdrop'),
   themeCloseBtn: document.getElementById('theme-close-btn'),
   themeOptions: document.getElementById('theme-options')
@@ -448,8 +449,13 @@ function applyTheme(themeId) {
     document.documentElement.dataset.theme = valid;
   }
 
-  if (els.themeBtnIcon) {
-    els.themeBtnIcon.textContent = valid === 'usagi' ? '🐰' : valid === 'acoustic' ? '🎸' : '🎨';
+  if (els.themeBtnIcon && els.themeBtnUsagi) {
+    const isUsagi = valid === 'usagi';
+    els.themeBtnIcon.hidden = isUsagi;
+    els.themeBtnUsagi.hidden = !isUsagi;
+    if (!isUsagi) {
+      els.themeBtnIcon.textContent = valid === 'acoustic' ? '🎸' : '🎨';
+    }
   }
 
   document.querySelectorAll('[data-theme-choice]').forEach((btn) => {

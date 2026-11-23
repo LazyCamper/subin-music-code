@@ -1,4 +1,4 @@
-const CACHE_NAME = 'chord-compare-v10';
+const CACHE_NAME = 'chord-compare-v11';
 const ASSETS = [
   './',
   './index.html',
