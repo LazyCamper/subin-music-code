@@ -33,7 +33,7 @@ const DEFAULT_SONGS = [
   },
   {
     id: 'builtin_hachiware_hitorigotsu',
-    title: '혼자말 (ひとりごつ)',
+    title: '혼잣말 (ひとりごつ)',
     artist: '하치와레',
     originalKey: 'C',
     memo: '카포 2프렛 C 키 연주 기준 (원곡 D 키는 +2 반음)',
@@ -133,9 +133,15 @@ function migrateSongsStore(rawStore) {
   const songs = Array.isArray(rawStore.songs) ? rawStore.songs : [];
   const normalized = songs
     .filter((s) => s && typeof s === 'object' && typeof s.title === 'string' && s.title.trim())
-    .map((s) => ({
-      id: typeof s.id === 'string' && s.id ? s.id : generateSongId(),
-      title: s.title.trim(),
+    .map((s) => {
+      const rawTitle = s.title.trim();
+      const title =
+        s.id === 'builtin_hachiware_hitorigotsu' && rawTitle === '혼자말 (ひとりごつ)'
+          ? '혼잣말 (ひとりごつ)'
+          : rawTitle;
+      return {
+        id: typeof s.id === 'string' && s.id ? s.id : generateSongId(),
+        title,
       artist: typeof s.artist === 'string' ? s.artist.trim() : '',
       originalKey: typeof s.originalKey === 'string' ? s.originalKey.trim() : '',
       memo: typeof s.memo === 'string' ? s.memo.trim() : '',
@@ -147,7 +153,8 @@ function migrateSongsStore(rawStore) {
         : [],
       createdAt: typeof s.createdAt === 'string' ? s.createdAt : new Date().toISOString(),
       updatedAt: typeof s.updatedAt === 'string' ? s.updatedAt : new Date().toISOString()
-    }));
+    };
+    });
 
   return {
     schemaVersion: SONGS_SCHEMA_VERSION,
