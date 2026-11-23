@@ -14,7 +14,9 @@ import {
   isFavorite,
   toggleFavorite,
   getLastState,
-  saveLastState
+  saveLastState,
+  getTheme,
+  saveTheme
 } from './storage.js';
 import { createSongsController } from './songs.js';
 
@@ -48,7 +50,12 @@ const els = {
   navFavBadge: document.getElementById('nav-fav-badge'),
   btnAppLauncher: document.getElementById('btn-app-launcher'),
   appLauncherBackdrop: document.getElementById('app-launcher-backdrop'),
-  launcherCloseBtn: document.getElementById('launcher-close-btn')
+  launcherCloseBtn: document.getElementById('launcher-close-btn'),
+  btnTheme: document.getElementById('btn-theme'),
+  themeBtnIcon: document.getElementById('theme-btn-icon'),
+  themeSheetBackdrop: document.getElementById('theme-sheet-backdrop'),
+  themeCloseBtn: document.getElementById('theme-close-btn'),
+  themeOptions: document.getElementById('theme-options')
 };
 
 const songsController = createSongsController({
@@ -60,6 +67,7 @@ const songsController = createSongsController({
 });
 
 async function init() {
+  applyTheme(getTheme());
   const res = await fetch('./data/chords.json');
   state.data = await res.json();
 
@@ -403,10 +411,49 @@ function bindEvents() {
   els.appLauncherBackdrop?.addEventListener('click', (e) => {
     if (e.target === els.appLauncherBackdrop) setLauncherOpen(false);
   });
+
+  function setThemeSheetOpen(open) {
+    if (!els.themeSheetBackdrop || !els.btnTheme) return;
+    els.themeSheetBackdrop.hidden = !open;
+    els.btnTheme.setAttribute('aria-expanded', String(open));
+  }
+
+  els.btnTheme?.addEventListener('click', () => setThemeSheetOpen(true));
+  els.themeCloseBtn?.addEventListener('click', () => setThemeSheetOpen(false));
+  els.themeSheetBackdrop?.addEventListener('click', (e) => {
+    if (e.target === els.themeSheetBackdrop) setThemeSheetOpen(false);
+  });
+  els.themeOptions?.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-theme-choice]');
+    if (!btn) return;
+    const choice = btn.dataset.themeChoice;
+    applyTheme(choice);
+    saveTheme(choice);
+    setThemeSheetOpen(false);
+  });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && els.appLauncherBackdrop && !els.appLauncherBackdrop.hidden) {
-      setLauncherOpen(false);
+    if (e.key === 'Escape') {
+      if (els.appLauncherBackdrop && !els.appLauncherBackdrop.hidden) setLauncherOpen(false);
+      if (els.themeSheetBackdrop && !els.themeSheetBackdrop.hidden) setThemeSheetOpen(false);
     }
+  });
+}
+
+function applyTheme(themeId) {
+  const valid = ['default', 'acoustic', 'usagi'].includes(themeId) ? themeId : 'default';
+  if (valid === 'default') {
+    delete document.documentElement.dataset.theme;
+  } else {
+    document.documentElement.dataset.theme = valid;
+  }
+
+  if (els.themeBtnIcon) {
+    els.themeBtnIcon.textContent = valid === 'usagi' ? '🐰' : valid === 'acoustic' ? '🎸' : '🎨';
+  }
+
+  document.querySelectorAll('[data-theme-choice]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.themeChoice === valid);
   });
 }
 

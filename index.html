@@ -22,17 +22,30 @@
           <h1 class="app-title">코드 비교</h1>
           <span class="app-subtitle">피아노 · 우쿨렐레 · 기타</span>
         </div>
-        <button
-          id="btn-app-launcher"
-          class="launcher-btn"
-          type="button"
-          aria-label="내 다른 앱 바로가기"
-          aria-haspopup="dialog"
-          aria-expanded="false"
-        >
-          <span aria-hidden="true">⊞</span>
-          <span class="launcher-label">내 앱</span>
-        </button>
+        <div class="header-actions">
+          <button
+            id="btn-theme"
+            class="launcher-btn"
+            type="button"
+            aria-label="테마 선택"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+          >
+            <span id="theme-btn-icon" aria-hidden="true">🎨</span>
+            <span class="launcher-label">테마</span>
+          </button>
+          <button
+            id="btn-app-launcher"
+            class="launcher-btn"
+            type="button"
+            aria-label="내 다른 앱 바로가기"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+          >
+            <span aria-hidden="true">⊞</span>
+            <span class="launcher-label">내 앱</span>
+          </button>
+        </div>
       </div>
       <div class="search-wrap">
         <label class="sr-only" for="chord-search">코드 검색</label>
@@ -113,6 +126,45 @@
     <div id="chord-sheet-backdrop" class="sheet-backdrop" hidden>
       <div class="bottom-sheet" role="dialog" aria-modal="true" aria-label="코드 운지 상세">
         <div id="chord-sheet-content"></div>
+      </div>
+    </div>
+
+    <!-- 테마 선택 하단 시트 -->
+    <div id="theme-sheet-backdrop" class="sheet-backdrop" hidden>
+      <div class="bottom-sheet" role="dialog" aria-modal="true" aria-label="테마 선택">
+        <div class="sheet-header">
+          <div>
+            <h2 class="edit-title">테마 선택</h2>
+            <span class="diagram-sub">원하는 분위기를 골라보세요</span>
+          </div>
+          <button id="theme-close-btn" class="icon-btn" type="button" aria-label="닫기">✕</button>
+        </div>
+        <div id="theme-options" class="app-links-list">
+          <button class="theme-card" type="button" data-theme-choice="default">
+            <span class="theme-swatch swatch-default" aria-hidden="true"></span>
+            <span class="app-link-info">
+              <strong class="app-link-title">기본 (블루)</strong>
+              <span class="app-link-sub">시스템 라이트/다크 모드 자동 적용</span>
+            </span>
+            <span class="theme-check" aria-hidden="true">✓</span>
+          </button>
+          <button class="theme-card" type="button" data-theme-choice="acoustic">
+            <span class="theme-swatch swatch-acoustic" aria-hidden="true"></span>
+            <span class="app-link-info">
+              <strong class="app-link-title">어쿠스틱 우드 🎸</strong>
+              <span class="app-link-sub">따뜻한 통기타 나무·크림 톤</span>
+            </span>
+            <span class="theme-check" aria-hidden="true">✓</span>
+          </button>
+          <button class="theme-card" type="button" data-theme-choice="usagi">
+            <span class="theme-swatch swatch-usagi" aria-hidden="true">🐰</span>
+            <span class="app-link-info">
+              <strong class="app-link-title">우사기 (먼작귀) 🐰</strong>
+              <span class="app-link-sub">우사기 버터 옐로우 &amp; 볼터치 핑크</span>
+            </span>
+            <span class="theme-check" aria-hidden="true">✓</span>
+          </button>
+        </div>
       </div>
     </div>
 

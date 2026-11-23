@@ -1,6 +1,7 @@
 const FAVORITES_KEY = 'subin_chord_favorites_v1';
 const LAST_STATE_KEY = 'subin_chord_last_v1';
 const SONGS_KEY = 'subin_chord_songs_v1';
+const THEME_KEY = 'subin_chord_theme_v1';
 export const SONGS_SCHEMA_VERSION = 1;
 
 const DEFAULT_SONGS = [
@@ -102,6 +103,22 @@ export function getLastState() {
 export function saveLastState(state) {
   try {
     localStorage.setItem(LAST_STATE_KEY, JSON.stringify(state));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
+export function getTheme() {
+  try {
+    return localStorage.getItem(THEME_KEY) || 'default';
+  } catch {
+    return 'default';
+  }
+}
+
+export function saveTheme(themeId) {
+  try {
+    localStorage.setItem(THEME_KEY, themeId);
   } catch {
     // Ignore storage errors
   }
